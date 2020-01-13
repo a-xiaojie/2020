@@ -68,7 +68,6 @@ function getUserInfo (id) {
             //cheerio也就是nodejs下的jQuery 将整个文档包装成一个集合，定义一个变量$接收
             var $ = cheerio.load(content);
             var nickName = $('.nickname').text();
-            var nickName = $('.nickname').text();
             var dyID = getNum($('p.shortid')).replace('抖音ID：', '')
             var follower = getNum($('span.follower')).replace('粉丝', '')
             resolve({
