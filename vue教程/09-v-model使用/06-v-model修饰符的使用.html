@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <p>1.lazy修饰符</p>
+  <input type="text" v-model.lazy="message">
+  <h2>{{message}}</h2>
+  <br>
+  <p>2.number修饰符</p>
+  <input type="number" v-model.number="age">
+  <h2>{{typeof age}}</h2>
+  <br>
+  <p>3.trim修饰符</p>
+  <input type="text" v-model.trim="message">
+  <h2>{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      age: 18
+    }
+  })
+</script>
+</body>
+</html>
