@@ -60,47 +60,95 @@
           </div>
         </el-main>
         <el-aside class="right flex flex-column" width="200px">
-          <div class="hd">参数设置</div>
-          <div class="bd flex-1">
-            <el-form :model="activeComponent" v-if="activeComponent" label-position="top" size="mini">
-              <el-form-item label="文案" v-if="activeComponent.name !== 'BANNER'">
-                <el-input v-model="activeComponent.text"/>
-              </el-form-item>
-              <el-form-item label="宽度">
-                <el-input v-model="activeComponent.styleOptions.width" />
-              </el-form-item>
-              <el-form-item label="高度">
-                <el-input v-model="activeComponent.styleOptions.height"/>
-              </el-form-item>
-              <el-form-item label="背景色">
-                <el-row :gutter="10">
-                  <el-col :span="5">
-                    <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
-                  </el-col>
-                  <el-col :span="19">
-                    <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
-                  </el-col>
-                </el-row>
-              </el-form-item>
-              <el-form-item label="文字颜色" v-if="activeComponent.name !== 'BANNER'">
-                <el-row :gutter="10">
-                  <el-col :span="5">
-                    <el-color-picker v-model="activeComponent.styleOptions.color"/>
-                  </el-col>
-                  <el-col :span="19">
-                    <el-input v-model="activeComponent.styleOptions.color"/>
-                  </el-col>
-                </el-row>
-              </el-form-item>
-              <el-form-item label="上传图片" v-if="activeComponent.name === 'BANNER'">
-                <uploader
-                    keyName="imgUrl"
-                    :files="activeComponent.imgUrl"
-                    :handle-change="handleUpload"
-                />
-              </el-form-item>
-            </el-form>
-          </div>
+          <template v-if="activeComponent">
+            <div class="hd">参数设置</div>
+            <div class="bd flex-1">
+              <el-form :model="activeComponent" v-if="activeComponent" label-position="top" size="mini">
+                <el-form-item label="文案" v-if="activeComponent.name !== 'BANNER'">
+                  <el-input v-model="activeComponent.text"/>
+                </el-form-item>
+                <el-form-item label="宽度">
+                  <el-input v-model="activeComponent.styleOptions.width" />
+                </el-form-item>
+                <el-form-item label="高度">
+                  <el-input v-model="activeComponent.styleOptions.height"/>
+                </el-form-item>
+                <el-form-item label="背景色">
+                  <el-row :gutter="10">
+                    <el-col :span="5">
+                      <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
+                    </el-col>
+                    <el-col :span="19">
+                      <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="文字颜色" v-if="activeComponent.name !== 'BANNER'">
+                  <el-row :gutter="10">
+                    <el-col :span="5">
+                      <el-color-picker v-model="activeComponent.styleOptions.color"/>
+                    </el-col>
+                    <el-col :span="19">
+                      <el-input v-model="activeComponent.styleOptions.color"/>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="上传图片" v-if="activeComponent.name === 'BANNER'">
+                  <uploader
+                      keyName="imgUrl"
+                      :files="activeComponent.imgUrl"
+                      :handle-change="handleUpload"
+                  />
+                </el-form-item>
+              </el-form>
+            </div>
+          </template>
+          <template v-else>
+            <div class="hd">页面参数设置</div>
+            <div class="bd flex-1">
+              <el-form :model="pageForm" label-position="top" size="mini">
+                <el-form-item label="页面标题">
+                  <el-input v-model="pageForm.pageTitle"/>
+                </el-form-item>
+                <el-form-item label="背景色">
+                  <el-row :gutter="10">
+                    <el-col :span="5">
+                      <el-color-picker v-model="pageForm.bgColor"/>
+                    </el-col>
+                    <el-col :span="19">
+                      <el-input v-model="pageForm.bgColor"/>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="淘口令文案">
+                  <el-input v-model="pageForm.mainCopyTemp"/>
+                </el-form-item>
+                <el-form-item label="海报原图">
+                  <uploader
+                      keyName="posterBgImg"
+                      :files="pageForm.posterOptions.posterBgImg"
+                      :handle-change="handleUpload"
+                  />
+                </el-form-item>
+                <el-form-item label="海报宽">
+                  <el-input v-model="pageForm.posterOptions.posterWidth"/>
+                </el-form-item>
+                <el-form-item label="海报高">
+                  <el-input v-model="pageForm.posterOptions.posterHeight"/>
+                </el-form-item>
+                <el-form-item label="二维码宽">
+                  <el-input v-model="pageForm.posterOptions.qrCode.width"/>
+                </el-form-item>
+                <el-form-item label="二维码高">
+                  <el-input v-model="pageForm.posterOptions.qrCode.height"/>
+                </el-form-item>
+                <el-form-item label="二维码坐标">
+                  左：<el-input v-model="pageForm.posterOptions.qrCode.left"/>
+                  顶：<el-input v-model="pageForm.posterOptions.qrCode.top"/>
+                </el-form-item>
+              </el-form>
+            </div>
+          </template>
         </el-aside>
       </el-container>
     </el-container>
@@ -152,6 +200,22 @@ export default {
       ],
       componentList: [],
       index: 0,
+      pageForm: {
+        pageTitle: '',
+        bgColor: '',
+        mainCopyTemp: '♬新年抢年货、囤货买买买，年终最后一波低价等你来，长按付zhi（[PWD]）本段文字、打开桃.bao~',
+        posterOptions: {
+          posterBgImg: '',
+          posterWidth: 750,
+          posterHeight: 1200,
+          qrCode: {
+            width: 260,
+            height: 260,
+            left: 244,
+            top: 875
+          }
+        }
+      }
     }
   },
   computed: {
