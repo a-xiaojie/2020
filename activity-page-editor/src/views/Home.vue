@@ -73,11 +73,24 @@
                 <el-input v-model="activeComponent.styleOptions.height"/>
               </el-form-item>
               <el-form-item label="背景色">
-                <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
-                <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
+                <el-row :gutter="10">
+                  <el-col :span="5">
+                    <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
+                  </el-col>
+                  <el-col :span="19">
+                    <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
+                  </el-col>
+                </el-row>
               </el-form-item>
               <el-form-item label="文字颜色" v-if="activeComponent.name !== 'BANNER'">
-                <el-color-picker v-model="activeComponent.styleOptions.color"/>
+                <el-row :gutter="10">
+                  <el-col :span="5">
+                    <el-color-picker v-model="activeComponent.styleOptions.color"/>
+                  </el-col>
+                  <el-col :span="19">
+                    <el-input v-model="activeComponent.styleOptions.color"/>
+                  </el-col>
+                </el-row>
               </el-form-item>
               <el-form-item label="上传图片" v-if="activeComponent.name === 'BANNER'">
                 <uploader
