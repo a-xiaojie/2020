@@ -1,30 +1,30 @@
 <template>
   <temp-wrap :class="{active: index === 0}"
-       @click.native="selectComponent(0)" :style="{backgroundColor: componentList[0].options.bgColor}">
+       @click.native="selectComponent(0)" :style="{backgroundColor: componentList[0].h5Options.bgColor}">
     <div v-for="(item, idx) in componentList" :key="item.key" :class="{active: index === idx}" @click.stop="selectComponent(idx)">
-      <div class="banner" v-if="item.name === 'TOP_IMG'">
-        <img :src="item.options.imgUrl" alt="">
+      <div class="banner" v-if="item.name === 'TOP_IMG'" :style="{height: item.h5Options.height + 'px'}">
+        <img :src="item.h5Options.imgUrl" alt="">
       </div>
       <div class="temp-main" v-if="item.name === 'MAIN'">
-        <button class="entry-btn" :style="{backgroundImage: `url(${item.options.imgUrl})`, backgroundColor: item.styleOptions.backgroundColor}">{{item.options.text || '进入主会场'}}</button>
+        <button class="entry-btn" :style="{backgroundImage: `url(${item.h5Options.imgUrl})`, backgroundColor: item.h5Options.bgColor}">{{item.h5Options.text || '进入主会场'}}</button>
         <div class="btns flex justify-center items-center">
           <button class="share-poster">分享海报</button>
           <button class="copy-btn">复制淘口令</button>
         </div>
       </div>
-      <div class="sub-main-mod" :class="{row1: item.options.row === 1, row2: item.options.row === 2, row3: item.options.row === 3}" v-if="item.name === 'SUB'">
-        <div class="mod-hd">{{item.options.title}}</div>
-        <div class="mod-bd" :class="{'flex flex-wrap justify-around': item.options.row === 3}">
-          <div class="item" :class="{flex: item.options.row === 1}" v-for="(child, sIndex) in item.children" :key="sIndex">
+      <div class="sub-main-mod" :class="{row1: item.h5Options.row === 1, row2: item.h5Options.row === 2, row3: item.h5Options.row === 3}" v-if="item.name === 'SUB'">
+        <div class="mod-hd" v-if="item.h5Options.title">{{item.h5Options.title}}</div>
+        <div class="mod-bd" :class="{'flex flex-wrap justify-around': item.h5Options.row !== 1}">
+          <div class="item" :class="{flex: item.h5Options.row === 1}" v-for="(child, sIndex) in item.children" :key="sIndex">
             <div class="img">
               <img :src="child.imgUrl">
             </div>
             <div class="info">
               <p class="title">{{child.title}}</p>
               <input class="pwd" v-model="child.activityId"/>
-              <div class="btns" :class="{'flex justify-between': item.options.row !== 3}">
-                <button class="flex-1 entry-btn">进入会场</button>
-                <button class="flex-1 copy-btn">一键复制</button>
+              <div class="btns" :class="{'flex justify-between': item.h5Options.row !== 3}">
+                <button class="flex-1 entry-btn" :style="{backgroundColor: item.h5Options.btnBgColor, color: item.h5Options.color}">进入会场</button>
+                <button class="flex-1 copy-btn" :style="{backgroundColor: item.h5Options.btnBgColor,  color: item.h5Options.color}">一键复制</button>
               </div>
             </div>
           </div>
@@ -166,6 +166,37 @@
           }
         }
       }
+      &.row2 {
+        .mod-bd {
+          padding: 0 12px;
+          .item {
+            width: 340px;
+            .img {
+              width: 340px;
+              height: 140px;
+              border-radius: 10px 10px 0 0;
+            }
+            .info {
+              width: 100%;
+              .title {
+                padding: 0 12px;
+                line-height: 50px;
+              }
+              .pwd {
+                margin-bottom: 16px;
+                background: #f8f8f8;
+              }
+              .btns {
+                padding: 0 12px 15px;
+                button {
+                  width: 100%;
+                  margin: 0 5px;
+                }
+              }
+            }
+          }
+        }
+      }
       &.row3 {
         .mod-bd {
           padding: 0 12px;
@@ -174,6 +205,7 @@
             .img {
               width: 218px;
               height: 114px;
+              border-radius: 10px 10px 0 0;
             }
             .info {
               width: 100%;

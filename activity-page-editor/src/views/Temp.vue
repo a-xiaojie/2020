@@ -1,7 +1,7 @@
 <template>
   <layout>
     <el-container class="temp-wrap">
-      <el-aside width="200px">
+      <!--<el-aside width="200px">
         <el-container>
           <el-header class="aside-hd" height="40px">组件库</el-header>
           <el-main>
@@ -12,10 +12,11 @@
             </ul>
           </el-main>
         </el-container>
-      </el-aside>
+      </el-aside>-->
       <el-container class="center">
         <el-header height="40px" class="btn-bar">
-          <el-button @click="submit" size="small" type="primary" round><i class="el-icon-check"></i>确定</el-button>
+          <el-button @click="addNewSubMod" size="small" type="primary" round icon="el-icon-circle-plus-outline">增加分会场模块</el-button>
+          <el-button @click="submit" size="small" type="primary" round icon="el-icon-check">保存</el-button>
         </el-header>
         <el-main class="">
           <div class="bd flex justify-center">
@@ -38,45 +39,46 @@
             <div class="aside-bd">
               <el-form size="mini" label-position="right" label-width="100px">
                 <el-form-item label="页面标题">
-                  <el-input v-model="activeComponent.options.pageTitle"/>
+                  <el-input v-model="activeComponent.h5Options.pageTitle"/>
                 </el-form-item>
                 <el-form-item label="背景色">
                   <el-row :gutter="10">
                     <el-col :span="5">
-                      <el-color-picker v-model="activeComponent.options.bgColor"/>
+                      <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.options.bgColor"/>
+                      <el-input v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="淘口令文案">
-                  <el-input v-model="activeComponent.options.mainCopyTemp"/>
+                  <el-input v-model="activeComponent.h5Options.mainCopyTemp" type="textarea" autosize/>
+                  <p style="font-size: 12px; color:#fb121c">*注意：淘口令用[PWD]代替</p>
                 </el-form-item>
                 <el-form-item label="海报原图">
                   <uploader
                       keyName="posterBgImg"
-                      :files="activeComponent.options.posterBgImg"
-                      :handle-change="handleUploadPoster"
+                      :files="activeComponent.h5Options.posterBgImg"
+                      :handle-change="handleChange"
                   />
                 </el-form-item>
                 <el-form-item label="海报宽">
-                  <el-input v-model="activeComponent.options.posterWidth"/>
+                  <el-input v-model="activeComponent.h5Options.posterWidth"/>
                 </el-form-item>
                 <el-form-item label="海报高">
-                  <el-input v-model="activeComponent.options.posterHeight"/>
+                  <el-input v-model="activeComponent.h5Options.posterHeight"/>
                 </el-form-item>
                 <el-form-item label="二维码信息">
-                  <el-input placeholder="宽" v-model="activeComponent.options.qrWidth">
+                  <el-input placeholder="宽" v-model="activeComponent.h5Options.qrWidth">
                     <template slot="prepend">宽:</template>
                   </el-input>
-                  <el-input placeholder="高" v-model="activeComponent.options.qrHeight">
+                  <el-input placeholder="高" v-model="activeComponent.h5Options.qrHeight">
                     <template slot="prepend">高:</template>
                   </el-input>
-                  <el-input placeholder="左" v-model="activeComponent.options.qrLeft">
+                  <el-input placeholder="左" v-model="activeComponent.h5Options.qrLeft">
                     <template slot="prepend">左:</template>
                   </el-input>
-                  <el-input placeholder="上" v-model="activeComponent.options.qrTop">
+                  <el-input placeholder="上" v-model="activeComponent.h5Options.qrTop">
                     <template slot="prepend">上:</template>
                   </el-input>
                 </el-form-item>
@@ -93,21 +95,21 @@
                 <el-form-item label="背景色">
                   <el-row :gutter="10">
                     <el-col :span="5">
-                      <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
+                      <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
+                      <el-input v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="图片高度">
-                  <el-input placeholder="请输入图片高度" v-model="activeComponent.options.height"/>
+                  <el-input placeholder="请输入图片高度" v-model="activeComponent.h5Options.height"/>
                 </el-form-item>
                 <el-form-item label="上传图片">
                   <uploader
                       key="topImg"
                       keyName="imgUrl"
-                      :fileList="activeComponent.options.imgUrl"
+                      :fileList="activeComponent.h5Options.imgUrl"
                       :handle-change="handleChange"
                   />
                 </el-form-item>
@@ -117,18 +119,18 @@
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
                 <el-form-item label="主会场ID">
-                  <el-input v-model="activeComponent.id"/>
+                  <el-input v-model="activeComponent.options.activityId"/>
                 </el-form-item>
                 <el-form-item label="按钮文案">
-                  <el-input v-model="activeComponent.options.text"/>
+                  <el-input v-model="activeComponent.h5Options.text"/>
                 </el-form-item>
                 <el-form-item label="按钮背景色">
                   <el-row :gutter="10">
                     <el-col :span="5">
-                      <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
+                      <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
+                      <el-input v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -136,7 +138,7 @@
                   <uploader
                       key="btnImg"
                       keyName="imgUrl"
-                      :fileList="activeComponent.options.imgUrl"
+                      :fileList="activeComponent.h5Options.imgUrl"
                       :handle-change="handleChange"
                   />
                 </el-form-item>
@@ -146,33 +148,51 @@
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
                 <el-form-item label="分会场标题">
-                  <el-input v-model="activeComponent.options.title"/>
+                  <el-input v-model="activeComponent.h5Options.title"/>
                 </el-form-item>
                 <el-form-item label="展示方式">
-                  <el-radio-group v-model="activeComponent.options.row">
+                  <el-radio-group v-model="activeComponent.h5Options.row">
                     <el-radio :label="1">一行一个</el-radio>
                     <el-radio :label="2">一行两个</el-radio>
                     <el-radio :label="3">一行三个</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-card class="box-card" v-if="activeComponent.children.length">
-                  <div v-for="(item, index) in activeComponent.children" :key="activeComponent.key + '_' + item.id">
-                    <el-form-item label="会场ID">
-                      <el-input v-model="item.activityId"/>
-                    </el-form-item>
-                    <el-form-item label="会场名称">
-                      <el-input v-model="item.title"/>
-                    </el-form-item>
-                    <el-form-item label="会场图">
-                      <uploader
-                          :keyName="index"
-                          :fileList="item.imgUrl"
-                          :handle-change="handleSubImgChange"
-                      />
-                    </el-form-item>
-                  </div>
+                <el-form-item label="按钮背景色">
+                  <el-row :gutter="10">
+                    <el-col :span="5">
+                      <el-color-picker v-model="activeComponent.h5Options.btnBgColor"/>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="activeComponent.h5Options.btnBgColor"/>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-form-item label="按钮文字颜色">
+                  <el-row :gutter="10">
+                    <el-col :span="5">
+                      <el-color-picker v-model="activeComponent.h5Options.color"/>
+                    </el-col>
+                    <el-col :span="18">
+                      <el-input v-model="activeComponent.h5Options.color"/>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-card class="box-card" v-for="(item, index) in activeComponent.children" :key="activeComponent.key + '_' + item.id">
+                  <el-form-item label="会场ID">
+                    <el-input v-model="item.activityId"/>
+                  </el-form-item>
+                  <el-form-item label="会场名称">
+                    <el-input v-model="item.title"/>
+                  </el-form-item>
+                  <el-form-item label="会场图">
+                    <uploader
+                        :keyName="index"
+                        :fileList="item.imgUrl"
+                        :handle-change="handleSubImgChange"
+                    />
+                  </el-form-item>
                 </el-card>
-                <el-button size="mini" @click="addNewSub">增加一个分会场</el-button>
+                <el-button size="mini" @click="addNewSub" round type="primary">增加一个分会场</el-button>
               </el-form>
             </div>
           </template>
@@ -197,54 +217,51 @@
     data () {
       return {
         componentsArr: [
-          {
-            name: 'TOP_IMG',
-            label: '头图',
-            disabled: false,
-            options: {
-              imgUrl: '',
-            },
-            styleOptions: {
-
-            }
-          },
-          {
-            name: 'MAIN',
-            label: '主会场',
-            disabled: false,
-            options: {
-              imgUrl: '',
-              text: '进入主会场'
-            },
-            styleOptions: {
-
-            },
-          },
-          {
-            name: 'SUB',
-            label: '分会场',
-            options: {
-              title: '精选分会场',
-              row: 1
-            },
-            styleOptions: {
-
-            },
-            children: []
-          }
         ],
         componentList: [
           {
             name: 'PAGE',
             label: '页面',
-            options: {
-
-            },
-            styleOptions: {
-              bgImg: '',
-              backgroundColor: ''
+            key: 'PAGE_'+ new Date().getTime(),
+            h5Options: {
+              pageTitle: '天猫三八节',
+              mainCopyTemp: '3.8女王节来袭，超多折扣等你来，復製[PWD]，打开【Tao宝】抢红包！',
+              posterWidth: 750,
+              posterHeight: 1200,
+              qrWidth: 260,
+              qrHeight: 260,
+              qrLeft: 244,
+              qrTop: 875,
             },
           },
+          {
+            name: 'TOP_IMG',
+            label: '头图',
+            key: 'TOP_IMG_' + new Date().getTime(),
+            h5Options: {
+              imgUrl: '',
+            }
+          },
+          {
+            name: 'MAIN',
+            label: '主会场',
+            key: 'MAIN_' + new Date().getTime(),
+            options: {},
+            h5Options: {
+              imgUrl: '',
+              text: '进入主会场'
+            },
+          },
+          {
+            name: 'SUB',
+            label: '分会场',
+            key: 'SUB_' + new Date().getTime(),
+            h5Options: {
+              title: '精选分会场',
+              row: 1
+            },
+            children: []
+          }
         ],
         index: 0,
       }
@@ -256,16 +273,16 @@
     },
     methods: {
       handleChange ({images, keyName}) {
-        this.activeComponent.options[keyName] = images.length ? images[0] : ''
+        this.activeComponent.h5Options[keyName] = images.length ? images[0] : ''
       },
       selectComponent (idx) {
         this.index = idx
       },
       handleSubImgChange ({images, keyName}) {
-        this.activeComponent.children[keyName].imgUrl = images[0]
+        this.activeComponent.children[keyName].imgUrl = images.length ? images[0] : ''
       },
       handleUploadPoster ({images}) {
-        this.activeComponent.options.posterBgImg = images[0]
+        this.activeComponent.h5Options.posterBgImg = images.length ? images[0] : ''
       },
       addNewSub () {
         const lastChildren = this.activeComponent.children[this.activeComponent.children.length - 1]
@@ -276,19 +293,26 @@
           activityId: ''
         })
       },
-      appendComponent (item) {
-        const newItem = JSON.parse(JSON.stringify(item))
-        if (item.disabled == false) {
-          item.disabled = true
-        }
-        newItem.key = newItem.name + '_' + new Date().getTime()
-        this.componentList.push(newItem)
+      addNewSubMod () {
+        const subMod = JSON.parse(JSON.stringify({
+          name: 'SUB',
+          label: '分会场',
+          h5Options: {
+            title: '精选分会场',
+            row: 1
+          },
+          children: []
+        }))
+        subMod.key = subMod.name + '_' + new Date().getTime()
+        this.componentList.push(subMod)
         this.index = this.componentList.length - 1
-        // this.componentList[this.index].key = new Date().getTime()
-        console.log(this.componentList)
       },
       submit () {
-        console.log(this.componentList)
+        const components = JSON.parse(JSON.stringify(this.componentList))
+        components.map(i => i.h5Options = JSON.stringify(i.h5Options))
+        const pageInfo = components[0]
+        pageInfo.components = components.slice(1)
+        console.log(JSON.stringify(pageInfo))
       }
     }
   }
@@ -324,11 +348,18 @@
       box-shadow: 0 1px 6px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.1);
     }
     .bd {
+      position: relative;
       .main-page {
         width: 375px;
         height: 667px;
         overflow: auto;
         box-shadow: 0 14px 45px rgba(0,0,0,.25), 0 10px 18px rgba(0,0,0,.2);
+      }
+      .tools {
+        position: absolute;
+        left: 50%;
+        top: 40px;
+        margin-left: 300px;
       }
     }
   }
@@ -350,5 +381,8 @@
     height: calc(100vh - 50px - 40px);
     padding: 10px 20px;
     overflow: auto;
+    .box-card {
+      margin-bottom: 10px;
+    }
   }
 </style>
