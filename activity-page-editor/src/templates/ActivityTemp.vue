@@ -2,17 +2,17 @@
   <temp-wrap :class="{active: index === 0}"
        @click.native="selectComponent(0)" :style="{backgroundColor: componentList[0].options.bgColor}">
     <div v-for="(item, idx) in componentList" :key="item.key" :class="{active: index === idx}" @click.stop="selectComponent(idx)">
-      <div class="banner" v-if="item.name === 'TOP_IMG'" style="font-size: 40px">
+      <div class="banner" v-if="item.name === 'TOP_IMG'">
         <img :src="item.options.imgUrl" alt="">
       </div>
-      <div class="temp-main" v-if="item.name === 'MAIN_ENTRY'">
-        <button class="entry-btn" :style="{backgroundImage: `url(${item.options.imgUrl})`}">进入主会场</button>
+      <div class="temp-main" v-if="item.name === 'MAIN'">
+        <button class="entry-btn" :style="{backgroundImage: `url(${item.options.imgUrl})`, backgroundColor: item.styleOptions.backgroundColor}">{{item.options.text || '进入主会场'}}</button>
         <div class="btns flex justify-center items-center">
           <button class="share-poster">分享海报</button>
           <button class="copy-btn">复制淘口令</button>
         </div>
       </div>
-      <div class="sub-main-mod" :class="{row1: item.options.row === 1, row2: item.options.row === 2, row3: item.options.row === 3}" v-if="item.name === 'SUB_ITEM'">
+      <div class="sub-main-mod" :class="{row1: item.options.row === 1, row2: item.options.row === 2, row3: item.options.row === 3}" v-if="item.name === 'SUB'">
         <div class="mod-hd">{{item.options.title}}</div>
         <div class="mod-bd" :class="{'flex flex-wrap justify-around': item.options.row === 3}">
           <div class="item" :class="{flex: item.options.row === 1}" v-for="(child, sIndex) in item.children" :key="sIndex">
@@ -85,6 +85,7 @@
         color: #fff;
         background: url(http://img-shop.kkkd.com/2020/yh/activity/38/button.png) no-repeat;
         background-size: 100%;
+        border-radius: 40px;
       }
       .btns {
         margin-top: 26px;

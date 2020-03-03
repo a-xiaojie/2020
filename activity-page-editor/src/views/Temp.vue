@@ -13,24 +13,30 @@
           </el-main>
         </el-container>
       </el-aside>
-      <el-main class="main">
-        <el-header height="40px">
-          <el-button @click="submit">确定<i class="el-icon-check"></i></el-button>
+      <el-container class="center">
+        <el-header height="40px" class="btn-bar">
+          <el-button @click="submit" size="small" type="primary" round><i class="el-icon-check"></i>确定</el-button>
         </el-header>
-        <div class="mobile-page">
-          <activity-temp
-              :index="index"
-              :componentList="componentList"
-              @selectComponent="selectComponent"
-          />
-        </div>
-      </el-main>
+        <el-main class="">
+          <div class="bd flex justify-center">
+            <div class="main-page">
+              <div class="mobile-page">
+                <activity-temp
+                    :index="index"
+                    :componentList="componentList"
+                    @selectComponent="selectComponent"
+                />
+              </div>
+            </div>
+          </div>
+        </el-main>
+      </el-container>
       <el-aside width="300px">
         <el-container>
           <template v-if="index === 0">
             <el-header class="aside-hd" height="40px">页面基本信息设置</el-header>
             <div class="aside-bd">
-              <el-form label-position="top" size="mini">
+              <el-form size="mini" label-position="right" label-width="100px">
                 <el-form-item label="页面标题">
                   <el-input v-model="activeComponent.options.pageTitle"/>
                 </el-form-item>
@@ -39,7 +45,7 @@
                     <el-col :span="5">
                       <el-color-picker v-model="activeComponent.options.bgColor"/>
                     </el-col>
-                    <el-col :span="19">
+                    <el-col :span="18">
                       <el-input v-model="activeComponent.options.bgColor"/>
                     </el-col>
                   </el-row>
@@ -61,20 +67,18 @@
                   <el-input v-model="activeComponent.options.posterHeight"/>
                 </el-form-item>
                 <el-form-item label="二维码信息">
-                  <el-row :gutter="20">
-                    <el-col :span="6">
-                      宽： <el-input v-model="activeComponent.options.qrWidth"/>
-                    </el-col>
-                    <el-col :span="6">
-                      高： <el-input v-model="activeComponent.options.qrHeight"/>
-                    </el-col>
-                    <el-col :span="6">
-                      左：<el-input v-model="activeComponent.options.qrLeft"/>
-                    </el-col>
-                    <el-col :span="6">
-                      顶：<el-input v-model="activeComponent.options.qrTop"/>
-                    </el-col>
-                  </el-row>
+                  <el-input placeholder="宽" v-model="activeComponent.options.qrWidth">
+                    <template slot="prepend">宽:</template>
+                  </el-input>
+                  <el-input placeholder="高" v-model="activeComponent.options.qrHeight">
+                    <template slot="prepend">高:</template>
+                  </el-input>
+                  <el-input placeholder="左" v-model="activeComponent.options.qrLeft">
+                    <template slot="prepend">左:</template>
+                  </el-input>
+                  <el-input placeholder="上" v-model="activeComponent.options.qrTop">
+                    <template slot="prepend">上:</template>
+                  </el-input>
                 </el-form-item>
               </el-form>
             </div>
@@ -82,7 +86,7 @@
           <template v-else>
             <el-header class="aside-hd" height="40px">属性设置</el-header>
             <div class="aside-bd">
-              <el-form v-if="activeComponent.name === 'TOP_IMG'" label-position="top" size="mini">
+              <el-form v-if="activeComponent.name === 'TOP_IMG'" size="mini" label-position="right" label-width="100px">
                 <el-form-item label="组件名称">
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
@@ -91,10 +95,13 @@
                     <el-col :span="5">
                       <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
                     </el-col>
-                    <el-col :span="19">
+                    <el-col :span="18">
                       <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
                     </el-col>
                   </el-row>
+                </el-form-item>
+                <el-form-item label="图片高度">
+                  <el-input placeholder="请输入图片高度" v-model="activeComponent.options.height"/>
                 </el-form-item>
                 <el-form-item label="上传图片">
                   <uploader
@@ -105,16 +112,22 @@
                   />
                 </el-form-item>
               </el-form>
-              <el-form v-if="activeComponent.name === 'MAIN_ENTRY'" label-position="top" size="mini">
+              <el-form v-if="activeComponent.name === 'MAIN'" size="mini" label-position="right" label-width="100px">
                 <el-form-item label="组件名称">
                   <el-input v-model="activeComponent.label" readonly disabled/>
+                </el-form-item>
+                <el-form-item label="主会场ID">
+                  <el-input v-model="activeComponent.id"/>
+                </el-form-item>
+                <el-form-item label="按钮文案">
+                  <el-input v-model="activeComponent.options.text"/>
                 </el-form-item>
                 <el-form-item label="按钮背景色">
                   <el-row :gutter="10">
                     <el-col :span="5">
                       <el-color-picker v-model="activeComponent.styleOptions.backgroundColor"/>
                     </el-col>
-                    <el-col :span="19">
+                    <el-col :span="18">
                       <el-input v-model="activeComponent.styleOptions.backgroundColor"/>
                     </el-col>
                   </el-row>
@@ -128,7 +141,7 @@
                   />
                 </el-form-item>
               </el-form>
-              <el-form v-if="activeComponent.name === 'SUB_ITEM'" label-position="top" size="mini">
+              <el-form v-if="activeComponent.name === 'SUB'" size="mini" label-position="right" label-width="100px">
                 <el-form-item label="组件名称">
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
@@ -142,7 +155,7 @@
                     <el-radio :label="3">一行三个</el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-card class="box-card">
+                <el-card class="box-card" v-if="activeComponent.children.length">
                   <div v-for="(item, index) in activeComponent.children" :key="activeComponent.key + '_' + item.id">
                     <el-form-item label="会场ID">
                       <el-input v-model="item.activityId"/>
@@ -171,7 +184,7 @@
 
 <script>
   import Layout from '../components/Layout'
-  import ActivityTemp from '../templates/SubTemp'
+  import ActivityTemp from '../templates/ActivityTemp'
   import Uploader from '../components/common/Uploader'
 
   export default {
@@ -196,18 +209,19 @@
             }
           },
           {
-            name: 'MAIN_ENTRY',
-            label: '主会场入口',
+            name: 'MAIN',
+            label: '主会场',
             disabled: false,
             options: {
               imgUrl: '',
+              text: '进入主会场'
             },
             styleOptions: {
 
             },
           },
           {
-            name: 'SUB_ITEM',
+            name: 'SUB',
             label: '分会场',
             options: {
               title: '精选分会场',
@@ -295,32 +309,32 @@
       }
     }
   }
-  .main {
+  .center {
     height: calc(100vh - 50px);
     background: #fff;
     box-shadow: 0 1px 6px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.1);
-
-    .hd {
+    .btn-bar {
       height: 40px;
       line-height: 40px;
       padding: 0 20px;
       font-size: 16px;
       color: #666;
-      background: #f5f5f5;
+      text-align: right;
+      background: #fff;
       box-shadow: 0 1px 6px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.1);
     }
     .bd {
       .main-page {
         width: 375px;
         height: 667px;
-        overflow: hidden;
+        overflow: auto;
         box-shadow: 0 14px 45px rgba(0,0,0,.25), 0 10px 18px rgba(0,0,0,.2);
       }
     }
   }
   .mobile-page {
     width: 750px;
-    transform: scale(.3);
+    transform: scale(.5);
     transform-origin: 0 0;
   }
   .aside-hd {
