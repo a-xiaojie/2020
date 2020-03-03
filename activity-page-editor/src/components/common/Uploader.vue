@@ -76,7 +76,7 @@
         default: function () {}
       },
       keyName: {
-        type: String,
+        type: [String, Number],
         default: ''
       }
     },
@@ -103,6 +103,7 @@
     },
     created() {
       const _file = this.fileList && (Array.isArray(this.fileList) ? this.fileList : [this.fileList]).filter(i => i) || []
+      console.log('_file', _file)
       this.xjfileList = _file.map((file, index) => {
         return {
           name: Date.now() + Math.random() + index + '.png',
