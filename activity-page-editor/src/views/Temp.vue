@@ -220,6 +220,7 @@
   import Layout from '../components/Layout'
   import ActivityTemp from '../templates/ActivityTemp'
   import Uploader from '../components/common/Uploader'
+  import * as service from '../service/pwd'
 
   export default {
     name: 'Temp',
@@ -324,26 +325,17 @@
         this.componentList.push(subMod)
         this.index = this.componentList.length - 1
       },
-      submit () {
+      async submit () {
         const components = JSON.parse(JSON.stringify(this.componentList))
         const pageInfo = components[0]
         pageInfo.components = components.slice(1)
-        fetch('http://mall.xuanwonainiu.com/activity/pwdTemp/save', {
-          method: 'post',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            content: JSON.stringify(pageInfo)
-          })
-        }).then(res => res.json()).then(res => {
-          if (res.status === 1) {
-            this.$message({
-              message: '保存成功!',
-              type: 'success'
-            });
-          }
+        await service.saveTemp({
+          content: JSON.stringify(pageInfo)
         })
+        this.$message({
+          message: '保存成功!',
+          type: 'success'
+        });
       }
     }
   }
