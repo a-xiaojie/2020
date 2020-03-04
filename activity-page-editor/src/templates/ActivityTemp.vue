@@ -2,11 +2,11 @@
   <temp-wrap :class="{active: index === 0}"
        @click.native="selectComponent(0)" :style="{backgroundColor: componentList[0].h5Options.bgColor}">
     <div v-for="(item, idx) in componentList" :key="item.key" :class="{active: index === idx}" @click.stop="selectComponent(idx)">
-      <div class="banner" v-if="item.name === 'TOP_IMG'" :style="{height: item.h5Options.height + 'px'}">
-        <img :src="item.h5Options.imgUrl" alt="">
+      <div class="banner" v-if="item.name === 'MAIN'" :style="{height: item.h5Options.topImgHeight + 'px'}">
+        <img :src="item.options.imgUrl" alt="">
       </div>
       <div class="temp-main" v-if="item.name === 'MAIN'">
-        <button class="entry-btn" :style="{backgroundImage: `url(${item.h5Options.imgUrl})`, backgroundColor: item.h5Options.bgColor}">{{item.h5Options.text || '进入主会场'}}</button>
+        <button class="entry-btn" :style="{backgroundImage: `url(${item.h5Options.imgUrl})`, backgroundColor: item.h5Options.btnBgColor}">{{item.h5Options.text}}</button>
         <div class="btns flex justify-center items-center">
           <button class="share-poster">分享海报</button>
           <button class="copy-btn">复制淘口令</button>

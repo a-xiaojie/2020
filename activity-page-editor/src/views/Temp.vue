@@ -39,7 +39,7 @@
             <div class="aside-bd">
               <el-form size="mini" label-position="right" label-width="100px">
                 <el-form-item label="页面标题">
-                  <el-input v-model="activeComponent.h5Options.pageTitle"/>
+                  <el-input v-model.trim="activeComponent.h5Options.pageTitle"/>
                 </el-form-item>
                 <el-form-item label="背景色">
                   <el-row :gutter="10">
@@ -47,12 +47,12 @@
                       <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.h5Options.bgColor"/>
+                      <el-input v-model.trim="activeComponent.h5Options.bgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="淘口令文案">
-                  <el-input v-model="activeComponent.h5Options.mainCopyTemp" type="textarea" autosize/>
+                  <el-input v-model.trim="activeComponent.h5Options.mainCopyTemp" type="textarea" autosize/>
                   <p style="font-size: 12px; color:#fb121c">*注意：淘口令用[PWD]代替</p>
                 </el-form-item>
                 <el-form-item label="海报原图">
@@ -63,22 +63,22 @@
                   />
                 </el-form-item>
                 <el-form-item label="海报宽">
-                  <el-input v-model="activeComponent.h5Options.posterWidth"/>
+                  <el-input v-model.trim="activeComponent.h5Options.posterWidth"/>
                 </el-form-item>
                 <el-form-item label="海报高">
-                  <el-input v-model="activeComponent.h5Options.posterHeight"/>
+                  <el-input v-model.trim="activeComponent.h5Options.posterHeight"/>
                 </el-form-item>
                 <el-form-item label="二维码信息">
-                  <el-input placeholder="宽" v-model="activeComponent.h5Options.qrWidth">
+                  <el-input placeholder="宽" v-model.trim="activeComponent.h5Options.qrWidth">
                     <template slot="prepend">宽:</template>
                   </el-input>
-                  <el-input placeholder="高" v-model="activeComponent.h5Options.qrHeight">
+                  <el-input placeholder="高" v-model.trim="activeComponent.h5Options.qrHeight">
                     <template slot="prepend">高:</template>
                   </el-input>
-                  <el-input placeholder="左" v-model="activeComponent.h5Options.qrLeft">
+                  <el-input placeholder="左" v-model.trim="activeComponent.h5Options.qrLeft">
                     <template slot="prepend">左:</template>
                   </el-input>
-                  <el-input placeholder="上" v-model="activeComponent.h5Options.qrTop">
+                  <el-input placeholder="上" v-model.trim="activeComponent.h5Options.qrTop">
                     <template slot="prepend">上:</template>
                   </el-input>
                 </el-form-item>
@@ -98,12 +98,12 @@
                       <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.h5Options.bgColor"/>
+                      <el-input v-model.trim="activeComponent.h5Options.bgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-form-item label="图片高度">
-                  <el-input placeholder="请输入图片高度" v-model="activeComponent.h5Options.height"/>
+                  <el-input placeholder="请输入图片高度" v-model.trim="activeComponent.h5Options.height"/>
                 </el-form-item>
                 <el-form-item label="上传图片">
                   <uploader
@@ -119,18 +119,32 @@
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
                 <el-form-item label="主会场ID">
-                  <el-input v-model="activeComponent.options.activityId"/>
+                  <el-input v-model.trim="activeComponent.options.activityId"/>
+                </el-form-item>
+                <el-form-item label="主会场名称">
+                  <el-input v-model.trim="activeComponent.options.title"/>
+                </el-form-item>
+                <el-form-item label="图片高度">
+                  <el-input placeholder="请输入图片高度" v-model.trim="activeComponent.h5Options.topImgHeight"/>
+                </el-form-item>
+                <el-form-item label="主会场图片">
+                  <uploader
+                      key="topImg"
+                      keyName="topImg"
+                      :fileList="activeComponent.options.imgUrl"
+                      :handle-change="handleChangeTopImg"
+                  />
                 </el-form-item>
                 <el-form-item label="按钮文案">
-                  <el-input v-model="activeComponent.h5Options.text"/>
+                  <el-input v-model.trim="activeComponent.h5Options.text"/>
                 </el-form-item>
                 <el-form-item label="按钮背景色">
                   <el-row :gutter="10">
                     <el-col :span="5">
-                      <el-color-picker v-model="activeComponent.h5Options.bgColor"/>
+                      <el-color-picker v-model="activeComponent.h5Options.btnBgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.h5Options.bgColor"/>
+                      <el-input v-model.trim="activeComponent.h5Options.btnBgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -148,7 +162,7 @@
                   <el-input v-model="activeComponent.label" readonly disabled/>
                 </el-form-item>
                 <el-form-item label="分会场标题">
-                  <el-input v-model="activeComponent.h5Options.title"/>
+                  <el-input v-model.trim="activeComponent.h5Options.title"/>
                 </el-form-item>
                 <el-form-item label="展示方式">
                   <el-radio-group v-model="activeComponent.h5Options.row">
@@ -163,7 +177,7 @@
                       <el-color-picker v-model="activeComponent.h5Options.btnBgColor"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.h5Options.btnBgColor"/>
+                      <el-input v-model.trim="activeComponent.h5Options.btnBgColor"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -173,16 +187,16 @@
                       <el-color-picker v-model="activeComponent.h5Options.color"/>
                     </el-col>
                     <el-col :span="18">
-                      <el-input v-model="activeComponent.h5Options.color"/>
+                      <el-input v-model.trim="activeComponent.h5Options.color"/>
                     </el-col>
                   </el-row>
                 </el-form-item>
                 <el-card class="box-card" v-for="(item, index) in activeComponent.children" :key="activeComponent.key + '_' + item.id">
                   <el-form-item label="会场ID">
-                    <el-input v-model="item.activityId"/>
+                    <el-input v-model.trim="item.activityId"/>
                   </el-form-item>
                   <el-form-item label="会场名称">
-                    <el-input v-model="item.title"/>
+                    <el-input v-model.trim="item.title"/>
                   </el-form-item>
                   <el-form-item label="会场图">
                     <uploader
@@ -234,19 +248,22 @@
               qrTop: 875,
             },
           },
-          {
-            name: 'TOP_IMG',
-            label: '头图',
-            key: 'TOP_IMG_' + new Date().getTime(),
-            h5Options: {
-              imgUrl: '',
-            }
-          },
+          // {
+          //   name: 'TOP_IMG',
+          //   label: '头图',
+          //   key: 'TOP_IMG_' + new Date().getTime(),
+          //   h5Options: {
+          //     imgUrl: '',
+          //   }
+          // },
           {
             name: 'MAIN',
             label: '主会场',
             key: 'MAIN_' + new Date().getTime(),
-            options: {},
+            options: {
+              title: '天猫三八节',
+              imgUrl: 'http://img-shop.kkkd.com/2020/yh/activity/38/bg.png',
+            },
             h5Options: {
               imgUrl: '',
               text: '进入主会场'
@@ -281,8 +298,8 @@
       handleSubImgChange ({images, keyName}) {
         this.activeComponent.children[keyName].imgUrl = images.length ? images[0] : ''
       },
-      handleUploadPoster ({images}) {
-        this.activeComponent.h5Options.posterBgImg = images.length ? images[0] : ''
+      handleChangeTopImg ({images}) {
+        this.activeComponent.options.imgUrl = images.length ? images[0] : ''
       },
       addNewSub () {
         const lastChildren = this.activeComponent.children[this.activeComponent.children.length - 1]
@@ -309,10 +326,24 @@
       },
       submit () {
         const components = JSON.parse(JSON.stringify(this.componentList))
-        components.map(i => i.h5Options = JSON.stringify(i.h5Options))
         const pageInfo = components[0]
         pageInfo.components = components.slice(1)
-        console.log(JSON.stringify(pageInfo))
+        fetch('http://mall.xuanwonainiu.com/activity/pwdTemp/save', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            content: JSON.stringify(pageInfo)
+          })
+        }).then(res => res.json()).then(res => {
+          if (res.status === 1) {
+            this.$message({
+              message: '保存成功!',
+              type: 'success'
+            });
+          }
+        })
       }
     }
   }
