@@ -1,22 +1,10 @@
 <template>
   <layout>
     <el-container class="temp-wrap">
-      <!--<el-aside width="200px">
-        <el-container>
-          <el-header class="aside-hd" height="40px">组件库</el-header>
-          <el-main>
-            <ul class="component-list">
-              <li v-for="(item, index) in componentsArr" :key="item.name" @click="appendComponent(item, index)">
-                <el-button :disabled="item.disabled" size="small" plain>{{item.label}}</el-button>
-              </li>
-            </ul>
-          </el-main>
-        </el-container>
-      </el-aside>-->
       <el-container class="center">
         <el-header height="40px" class="btn-bar">
           <el-button @click="addNewSubMod" size="small" type="primary" round icon="el-icon-circle-plus-outline">增加分会场列表</el-button>
-          <el-button @click="submitTest" size="small" type="primary" round icon="el-icon-check">保存</el-button>
+          <el-button @click="submit" size="small" type="primary" round icon="el-icon-check">保存</el-button>
         </el-header>
         <el-main class="">
           <div class="bd flex justify-center">
@@ -328,7 +316,7 @@
         this.componentList.splice(this.index)
         this.index = this.componentList.length - 1
       },
-      submitTest () {
+      async submit () {
         let valid = true
 
         this.componentList.map(i => {
@@ -354,12 +342,6 @@
         if (!valid) {
           return
         }
-        const components = JSON.parse(JSON.stringify(this.componentList))
-        const pageInfo = components[0]
-        pageInfo.components = components.slice(1)
-        console.log(pageInfo)
-      },
-      async submit () {
         const components = JSON.parse(JSON.stringify(this.componentList))
         const pageInfo = components[0]
         pageInfo.components = components.slice(1)
