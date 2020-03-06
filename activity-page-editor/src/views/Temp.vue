@@ -179,7 +179,7 @@
                     <div style="text-align: right">
                       <el-button size="mini" @click="deleteSub(index)" round type="danger" icon="el-icon-delete">删除该分会场</el-button>
                     </div>
-                </el-card>
+                  </el-card>
                   <el-button size="mini" @click="addSub" round type="primary" icon="el-icon-plus">新增分会场</el-button>
                 </el-card>
                 <el-button size="small" style="display: block; width: 60%; margin: 0 auto" round @click="deleteComponent" icon="el-icon-delete" type="danger">删除当前组件</el-button>
@@ -226,14 +226,6 @@
               qrTop: 875,
             },
           },
-          // {
-          //   name: 'TOP_IMG',
-          //   label: '头图',
-          //   key: 'TOP_IMG_' + new Date().getTime(),
-          //   h5Options: {
-          //     imgUrl: '',
-          //   }
-          // },
           {
             name: 'MAIN',
             label: '主会场',
