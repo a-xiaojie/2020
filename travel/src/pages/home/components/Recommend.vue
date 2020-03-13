@@ -2,7 +2,7 @@
   <div>
     <div class="title">热销推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item in recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item in list" :key="item.id">
         <img :src="item.imgUrl" alt="" class="item-img">
         <div class="item-info">
           <p class="item-title">{{item.title}}</p>
@@ -17,25 +17,8 @@
 <script>
 export default {
   name: 'HomeRecommend',
-  data () {
-    return {
-      recommendList: [{
-        id: '0001',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1508/d7/8cf4043a2246e37dae2122232802adb2.water.jpg_200x200_ab7bbc76.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }, {
-        id: '0002',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1508/d7/8cf4043a2246e37dae2122232802adb2.water.jpg_200x200_ab7bbc76.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }, {
-        id: '0003',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1508/d7/8cf4043a2246e37dae2122232802adb2.water.jpg_200x200_ab7bbc76.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(page, index) in pages" :key="index">
-        <div class="icon" v-for="item in page" :key="item.imgUrl">
+        <div class="icon" v-for="item in page" :key="item.id">
           <div class="icon-img">
             <img :src="item.imgUrl" alt=""/>
           </div>
-          <p class="icon-desc">{{item.text}}</p>
+          <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
     </swiper>
@@ -16,61 +16,20 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
-      icons: [
-        {
-          id: '0001',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          text: '热门景点热门景点'
-        },
-        {
-          id: '0002',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/b8/c5dcdb58deec2402.png',
-          text: '热门景点'
-        },
-        {
-          id: '0003',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png',
-          text: '热门景点'
-        },
-        {
-          id: '0004',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/f5/a963333e1fa802.png',
-          text: '热门景点'
-        },
-        {
-          id: '0005',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-          text: '热门景点'
-        },
-        {
-          id: '0006',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/fc/b10a6b2e4f0fe102.png',
-          text: '热门景点'
-        },
-        {
-          id: '0007',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/75/eca3ce656c886502.png',
-          text: '热门景点'
-        },
-        {
-          id: '0008',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/c1/6f15f887179fa002.png',
-          text: '热门景点'
-        },
-        {
-          id: '0009',
-          imgUrl: 'https://imgs.qunarzz.com/piao/fusion/1803/ab/6f7d6e44963c9302.png',
-          text: '泡温泉'
-        }
-      ]
+      swiperOption: {
+        autoplay: false
+      }
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.icons.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []

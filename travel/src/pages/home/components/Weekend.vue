@@ -2,7 +2,7 @@
   <div>
     <div class="title">周末去哪儿</div>
     <ul>
-      <li class="item border-bottom" v-for="item in recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item in list" :key="item.id">
         <div class="item-img-wrapper">
           <img :src="item.imgUrl" alt="" class="item-img">
         </div>
@@ -18,25 +18,8 @@
 <script>
 export default {
   name: 'HomeWeekend',
-  data () {
-    return {
-      recommendList: [{
-        id: '0001',
-        imgUrl: 'https://imgs.qunarzz.com/sight/source/1602/c1/48e295bdafbc88.jpg_r_640x214_3723c001.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }, {
-        id: '0002',
-        imgUrl: 'https://imgs.qunarzz.com/sight/source/1602/c1/48e295bdafbc88.jpg_r_640x214_3723c001.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }, {
-        id: '0003',
-        imgUrl: 'https://imgs.qunarzz.com/sight/source/1602/c1/48e295bdafbc88.jpg_r_640x214_3723c001.jpg',
-        title: '杭州薰衣草庄园',
-        desc: '杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园杭州薰衣草庄园'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>
@@ -44,7 +27,6 @@ export default {
 <style lang="stylus" scoped>
   @import "~styles/mixins.styl"
   .title
-    margin-top: .2rem
     line-height: .8rem
     text-indent: .2rem
     background: #eee
