@@ -1,30 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Temp from '../views/Temp.vue'
+import Index from '../views/Index'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Temp',
-    component: Temp
+    name: 'Index',
+    component: Index
   },
   {
     path: '/home',
     name: 'Home',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+    component: () => import('../views/Home')
   },
   {
-    path: '/index',
-    name: 'Index',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Index.vue')
+    path: '/temp',
+    name: 'Temp',
+    component: () => import('../views/Temp')
   }
 ]
 
