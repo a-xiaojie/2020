@@ -43,7 +43,6 @@
     methods: {
       ...mapMutations(['clearActiveTemplate']),
       cancelActive () {
-        console.log(1111)
         this.clearActiveTemplate()
       }
     }

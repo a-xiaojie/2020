@@ -19,7 +19,6 @@ export default new Vuex.Store({
     },
     toggleTempStatus (state, id) {
       state.activeTemplate = state.activeTemplate === id ? '' : id
-      console.log(state.activeTemplate)
     },
     setHoverTemplate (state, id) {
       state.hoverTemplate = id

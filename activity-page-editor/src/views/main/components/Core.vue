@@ -16,6 +16,7 @@
 <script>
   import BaseButton from '@/templates/baseComp/BaseButton'
   import BaseText from '@/templates/baseComp/BaseText'
+  import BaseInput from '@/templates/baseComp/BaseInput'
   import { mapState } from 'vuex'
   export default {
     name: 'Core',
@@ -24,7 +25,8 @@
     },
     components: {
       BaseButton,
-      BaseText
+      BaseText,
+      BaseInput,
     }
   }
 </script>

@@ -20,7 +20,7 @@ export function baseButton (store) {
       width: 100,
       height: 50,
       zIndex: store.state.templates.length + 1,
-      background: 'gray',
+      background: 'rgba(0, 0, 0, 1)',
       color: 'white',
       fontSize: 14,
       borderColor: 'rgba(0, 0, 0, 1)',

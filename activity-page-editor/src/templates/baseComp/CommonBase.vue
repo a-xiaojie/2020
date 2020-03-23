@@ -12,8 +12,8 @@
     </div>
     <div
         v-show="!editStatus && !hoverStatus"
-        class="base-complate"
-        :style="style"
+        class="base-complete"
+        :style="constyle"
     >
       <slot></slot>
     </div>
@@ -95,7 +95,7 @@
     user-select: none;
     outline: 1px solid @themeColor;
   }
-  .base-complate {
+  .base-complete {
     position: absolute;
     user-select: none;
   }

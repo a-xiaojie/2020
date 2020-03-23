@@ -1,18 +1,22 @@
 <template>
-  <div class="btn_con">
-    <edit>
-      <p :style="style" class="inline_btn" v-html="showText"></p>
-    </edit>
-  </div>
+  <common-base
+      :id="id"
+      :text="text"
+      :css="css"
+      :option="option"
+  >
+    <input :placeholder="option.placeholder" type="text" class="btn-con" :style="style" />
+  </common-base>
 </template>
 
 <script>
   import { handleStyle } from '@/utils'
-  import Edit from '@/views/main/components/Edit'
+  import CommonBase from './CommonBase'
+
   export default {
-    name: 'BaseText',
+    name: 'BaseInput',
     components: {
-      Edit
+      CommonBase
     },
     props: {
       id: {
@@ -38,19 +42,9 @@
       style () {
         return handleStyle(this.css)
       },
-      constyle () {
-        return {
-          top: this.style.top,
-          left: this.style.left,
-          width: this.style.width,
-          height: this.style.height,
-          zIndex: this.style.zIndex
-        }
-      }
-    }
+    },
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
 </style>
