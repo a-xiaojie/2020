@@ -5,8 +5,25 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    templates: [],
+    activeTemplate: '',
+    hoverTemplate: ''
   },
   mutations: {
+    setTemplate (state, payload) {
+      state.templates.push(payload)
+      state.activeTemplate = payload.id
+    },
+    clearActiveTemplate (state) {
+      state.activeTemplate = ''
+    },
+    toggleTempStatus (state, id) {
+      state.activeTemplate = state.activeTemplate === id ? '' : id
+      console.log(state.activeTemplate)
+    },
+    setHoverTemplate (state, id) {
+      state.hoverTemplate = id
+    }
   },
   actions: {
   },
