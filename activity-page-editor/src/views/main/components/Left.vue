@@ -13,14 +13,30 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane name="SETTINGS" label="设置"></el-tab-pane>
+      <el-tab-pane name="SETTINGS" label="设置">
+        <el-form size="small" label-position="right" label-width="75px" class="settings">
+          <el-form-item label="背景色:">
+            <el-row :gutter="10">
+              <el-col :span="5">
+                <el-color-picker v-model="core.background"/>
+              </el-col>
+              <el-col :span="18">
+                <el-input v-model="core.background"/>
+              </el-col>
+            </el-row>
+          </el-form-item>
+          <el-form-item label="网页标题:">
+            <el-input type="text" placeholder="请输入网页标题" v-model="core.pageTitle"/>
+          </el-form-item>
+        </el-form>
+      </el-tab-pane>
     </el-tabs>
   </el-aside>
 </template>
 
 <script>
   import { baseButton, baseImg, baseInput, baseText} from '@/utils/baseComponents'
-  import { mapMutations } from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
 
   export default {
     name: 'Left',
@@ -46,6 +62,9 @@
           }
         ]
       }
+    },
+    computed: {
+      ...mapState(['core'])
     },
     methods: {
       ...mapMutations(['setTemplate']),
@@ -103,5 +122,8 @@
         background: @bgColor;
       }
     }
+  }
+  .settings {
+    padding: 20px;
   }
 </style>

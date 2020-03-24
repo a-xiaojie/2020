@@ -2,10 +2,10 @@
   <div class="attributes">
     <el-form v-if="hasActiveTemp" size="small" label-position="right" label-width="100px">
       <el-form-item label="位置X:">
-        <el-slider v-model="core.css.left" show-input></el-slider>
+        <el-slider v-model="core.css.left" max="10000" show-input></el-slider>
       </el-form-item>
       <el-form-item label="位置Y:">
-        <el-slider v-model="core.css.top" show-input></el-slider>
+        <el-slider v-model="core.css.top" max="10000" show-input></el-slider>
       </el-form-item>
       <el-form-item label="层级:">
         <el-slider v-model="core.css.zIndex" show-input></el-slider>

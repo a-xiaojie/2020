@@ -21,7 +21,7 @@ export function baseButton (store) {
       height: 50,
       zIndex: store.state.templates.length + 1,
       background: 'rgba(0, 0, 0, 1)',
-      color: 'white',
+      color: '#fff',
       fontSize: 14,
       borderColor: 'rgba(0, 0, 0, 1)',
       borderStyle: 'solid',

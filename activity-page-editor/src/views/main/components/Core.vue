@@ -1,5 +1,7 @@
 <template>
-  <div class="core">
+  <div class="core"
+       :style="{background: core.background}"
+  >
     <component
         v-for="(item, index) in templates"
         :key="index"
@@ -21,7 +23,7 @@
   export default {
     name: 'Core',
     computed: {
-      ...mapState(['templates'])
+      ...mapState(['core', 'templates'])
     },
     components: {
       BaseButton,
