@@ -2,7 +2,7 @@ import { observable, action, computed } from 'mobx'
 import moment from 'moment'
 
 class AppStore {
-  @observable time: string | number = '2019'
+  @observable time: string | number = ''
   @observable todos: any [] = []
 
   @computed get desc () {
