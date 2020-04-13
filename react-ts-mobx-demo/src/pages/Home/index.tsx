@@ -4,6 +4,7 @@ import {
   observer,
 } from 'mobx-react'
 import './style.css'
+import {values} from 'mobx'
 
 @inject('mobxStore')
 @observer
@@ -28,9 +29,11 @@ export default class Home extends React.Component<any , any> {
         <button onClick={() => this.handleTodos('reset')}>任务重置</button>
 
         {
-          mobxStore.todos.map((item: any, index: number) => {
+          values(mobxStore.todos).map((item: any, index: number) => {
             return (
-              <div key={index}>{item}</div>
+              <div key={index}>
+                {item.name}
+              </div>
             )
           })
         }
@@ -42,7 +45,7 @@ export default class Home extends React.Component<any , any> {
     const { mobxStore } = this.props
     switch (type) {
       case 'add':
-        mobxStore.addTodo('一条新任务')
+        mobxStore.addTodo({name: '一条新任务', done: false})
         break
       case 'delete':
         mobxStore.deleteTodo()

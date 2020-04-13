@@ -2,5 +2,5 @@
 import MobxStores from './MobxStores'
 
 export default {
-  mobxStore: new MobxStores()
+  mobxStore: MobxStores.create()
 }
